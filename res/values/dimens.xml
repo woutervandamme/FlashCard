@@ -7,6 +7,7 @@
     <!-- Default basic paddings -->
 	<dimen name="basic_medium_padding">10dp</dimen>   
 	<dimen name="basic_medium_high_padding">25dp</dimen>   
+	<dimen name="basic_high_padding">45dp</dimen>  
     
     
     <!-- Header title -->

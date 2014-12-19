@@ -39,8 +39,10 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/emailHint"
-            android:inputType="textEmailAddress" />
-
+            android:inputType="textEmailAddress" >
+            <requestFocus />
+        </EditText>
+            
         <TextView
             android:id="@+id/passwordTextView"
             android:layout_width="wrap_content"
