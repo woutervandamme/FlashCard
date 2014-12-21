@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Flashcards</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Login/Registration strings -->
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="register">Tap here to register</string>
+    <string name="login">Login</string>
+    <string name="emailHint">mail@example.com</string>
+    <string name="flashcardDescription">A flashcard</string>
+    <string name="registrationForm">Registration Form</string>
+	<string name="name">Name</string>
+    <string name="screenName">Screen name</string>
+    <string name="repeatPassword">Repeat password</string>
+    <string name="registerButton">Register</string>
+</resources>
