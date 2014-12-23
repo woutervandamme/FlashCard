@@ -24,49 +24,64 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/questionHeight"
         android:background="@drawable/flashcard"
         android:orientation="vertical"
         android:paddingLeft="@dimen/basic_medium_padding"
         android:paddingRight="@dimen/basic_medium_padding"
-        android:paddingTop="@dimen/basic_medium_padding"
-        android:paddingBottom="@dimen/basic_medium_padding" >
+        android:paddingBottom="@dimen/basic_medium_padding"
+        android:minHeight="@dimen/questionHeight">
 
-        <TextView
-            android:paddingTop="@dimen/title_padding"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/dummyTitle"
-            android:id="@+id/textView3" />
+            android:layout_weight="1">
 
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minHeight="@dimen/questionHeight">
-
-            <!-- Image view and textview "overlap" in code one of them must be hidden -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/dummyQuestion"
-                android:id="@+id/textView4" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/dummyTitle"
+                android:id="@+id/textView3" />
 
-            <ImageView
+            <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView4" />
+                android:layout_height="wrap_content">
 
-        </FrameLayout>
+                <!-- Image view and textview "overlap" in code one of them must be hidden -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/dummyQuestion"
+                    android:id="@+id/textView4" />
 
-        <EditText
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView4" />
+
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText"
-         >
-            <requestFocus/>
-        </EditText>
+            android:gravity="bottom"
+            android:layout_weight="1"
+            android:layout_gravity="bottom">
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText"
+                android:inputType="text"
+                android:gravity="bottom">
+                <requestFocus/>
+            </EditText>
+        </LinearLayout>
 
 
     </LinearLayout>

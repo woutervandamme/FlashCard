@@ -42,6 +42,10 @@
             android:name=".QuestionActivity"
             android:label="@string/title_activity_question" >
         </activity>
+        <activity
+            android:name="com.example.robbe.flashcard.VerificationActivity"
+            android:label="@string/title_activity_verification" >
+        </activity>
     </application>
 
 </manifest>

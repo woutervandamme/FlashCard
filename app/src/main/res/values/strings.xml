@@ -21,7 +21,18 @@
     <string name="createGroup">Create a group</string>
     <string name="title_activity_question">QuestionActivity</string>
     <string name="dummyTitle">Dummy Question Title 1: </string>
-    <string name="dummyQuestion">I have one megaphone. Am I better of converting it to one million phones, or one trillion microphones?</string>
+    <string name="dummyQuestion">I have one megaphone. Am I better of converting it to one million phones,
+        or one trillion microphones?</string>
     <string name="answer">Verify answer</string>
     <string name="dummyHeaderTitle">Dummy header</string>
+    <string name="title_activity_verification">VerificationActivity</string>
+    <string name="extraInfo">Extra info:</string>
+
+<string name="dummyAnswer">Trick question, it all depends if you're the FBI or NSA, if you're the FBI, you want the microphones.
+    In case you're the NSA, you'll want the phones.</string>
+
+    <string name="next">Next</string>
+
+
+
 </resources>

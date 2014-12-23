@@ -16,7 +16,7 @@
     <dimen name="title_text_size">25sp</dimen>
 
 
-    <dimen name="questionHeight">75sp</dimen>
+    <dimen name="questionHeight">200sp</dimen>
 
 
 </resources>
