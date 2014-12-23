@@ -27,12 +27,14 @@
     <string name="dummyHeaderTitle">Dummy header</string>
     <string name="title_activity_verification">VerificationActivity</string>
     <string name="extraInfo">Extra info:</string>
-
-<string name="dummyAnswer">Trick question, it all depends if you're the FBI or NSA, if you're the FBI, you want the microphones.
+    <string name="dummyAnswer">Trick question, it all depends if you're the FBI or NSA, if you're the FBI, you want the microphones.
     In case you're the NSA, you'll want the phones.</string>
-
     <string name="next">Next</string>
-
-
-
+    <string name="feedback">Give feedback</string>
+    <string name="editinfo">Edit extra info</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="newpassword">New password</string>
+    <string name="repeatnewPassword">Repeat new password</string>
+    <string name="oldpassword">Old password</string>
+    <string name="save">Save settings</string>
 </resources>

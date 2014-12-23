@@ -43,8 +43,12 @@
             android:label="@string/title_activity_question" >
         </activity>
         <activity
-            android:name="com.example.robbe.flashcard.VerificationActivity"
+            android:name=".VerificationActivity"
             android:label="@string/title_activity_verification" >
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings" >
         </activity>
     </application>
 

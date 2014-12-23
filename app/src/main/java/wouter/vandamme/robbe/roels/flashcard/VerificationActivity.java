@@ -1,4 +1,4 @@
-package com.example.robbe.flashcard;
+package wouter.vandamme.robbe.roels.flashcard;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
