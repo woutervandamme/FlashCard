@@ -37,8 +37,4 @@
     <string name="repeatnewPassword">Repeat new password</string>
     <string name="oldpassword">Old password</string>
     <string name="save">Save settings</string>
-    <string name="title_activity_create_group">Create group</string>
-    <string name="groupname">Group name</string>
-    <string name="normalInvite">Normal user can invite friends</string>
-    <string name="normalAddQuestion">Normal user can add questions</string>
 </resources>
