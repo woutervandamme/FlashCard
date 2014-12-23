@@ -58,6 +58,14 @@
             android:name=".GroupSettingsActivity"
             android:label="@string/title_activity_group_settings" >
         </activity>
+        <activity
+            android:name=".MessagesActivity"
+            android:label="@string/title_activity_messages" >
+        </activity>
+        <activity
+            android:name=".ReadMessageActivity"
+            android:label="@string/title_activity_read_message" >
+        </activity>
     </application>
 
 </manifest>

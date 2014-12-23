@@ -48,6 +48,14 @@
     <string name="uploadPicture">Upload picture</string>
     <string name="answer">Answer</string>
     <string name="saveAnswer">Save answer</string>
+    <string name="title_activity_messages">MessagesActivity</string>
+    <string name="dummyMessageHeader">Message from dummy</string>
+    <string name="title_activity_read_message">ReadMessageActivity</string>
+    <string name="postiveDummy">Postive</string>
+    <string name="negativeDummy">Negative</string>
+    <string name="dummyMessage">Hi, you have been invited to the group dummy dumdums</string>
+
+
 
 
 </resources>
