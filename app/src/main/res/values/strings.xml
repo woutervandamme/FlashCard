@@ -12,8 +12,11 @@
     <string name="emailHint">mail@example.com</string>
     <string name="flashcardDescription">A flashcard</string>
     <string name="registrationForm">Registration Form</string>
-	<string name="name">Name</string>
+    <string name="name">Name</string>
     <string name="screenName">Screen name</string>
     <string name="repeatPassword">Repeat password</string>
     <string name="registerButton">Register</string>
+    <string name="title_activity_menu">Menu</string>
+    <string name="dummyNumber">9</string>
+
 </resources>
