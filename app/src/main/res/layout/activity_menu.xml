@@ -11,61 +11,25 @@
     tools:context="wouter.vandamme.robbe.roels.flashcard.MenuActivity"
     android:background="@drawable/blackboard">
 
-
-    <LinearLayout
-        android:orientation="horizontal"
+    <!-- Important to fill_parent the include, layout will suck otherwise -->
+    <include
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/title_height">
+        android:layout_height="wrap_content"
+        layout="@layout/header" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/createGroup"
+        android:id="@+id/button"
+        android:layout_marginLeft="@dimen/basic_medium_padding"
+        android:layout_marginTop="@dimen/basic_medium_padding"
+        android:layout_marginBottom="@dimen/basic_medium_padding" />
 
-        <ImageView
-            android:layout_width="@dimen/title_height"
-            android:layout_height="@dimen/title_height"
-            android:id="@+id/imageView"
-            android:src="@drawable/configuration"
-            android:layout_marginRight="5dp" />
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:clickable="true" />
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/title_activity_menu"
-            android:id="@+id/textView"
-            android:textColor="@color/white"
-            android:layout_gravity="center"
-            android:singleLine="true"
-            android:gravity="center"
-            android:layout_weight="1" />
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="5dp">
-
-            <ImageView
-                android:layout_width="@dimen/title_height"
-                android:layout_height="@dimen/title_height"
-                android:id="@+id/imageView2"
-                android:src="@drawable/enveloppe" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/dummyNumber"
-                android:id="@+id/textView2"
-                android:layout_gravity="bottom|right"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp" />
-        </FrameLayout>
-
-        <ImageView
-            android:layout_width="@dimen/title_height"
-            android:layout_height="@dimen/title_height"
-            android:id="@+id/imageView3"
-            android:src="@drawable/questionmark"
-            android:layout_marginLeft="5dp" />
-
-    </LinearLayout>
 </LinearLayout>
