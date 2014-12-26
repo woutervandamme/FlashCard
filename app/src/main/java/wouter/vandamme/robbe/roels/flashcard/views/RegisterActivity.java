@@ -1,8 +1,10 @@
-package wouter.vandamme.robbe.roels.flashcard;
+package wouter.vandamme.robbe.roels.flashcard.views;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+
+import wouter.vandamme.robbe.roels.flashcard.R;
 
 public class RegisterActivity extends Activity {
 

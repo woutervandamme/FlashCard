@@ -12,8 +12,8 @@
         <ImageView
             android:layout_width="@dimen/title_height"
             android:layout_height="@dimen/title_height"
-            android:id="@+id/settingsImagebutton"
-            android:src="@drawable/configuration"
+            android:id="@+id/imageView"
+            android:src="@drawable/configuration_black"
             android:layout_marginRight="5dp"
             android:clickable="true"
             android:onClick="toSettings"/>
@@ -24,7 +24,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/dummyHeaderTitle"
             android:id="@+id/title_id"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:layout_gravity="center"
             android:singleLine="true"
             android:gravity="center"
@@ -39,7 +39,7 @@
             <ImageView
                 android:layout_width="@dimen/title_height"
                 android:layout_height="@dimen/title_height"
-                android:id="@+id/messagesImageView"
+                android:id="@+id/imageView2"
                 android:src="@drawable/enveloppe"
                 android:clickable="true"
                 android:onClick="toMessages"/>
@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/dummyNumber"
-                android:id="@+id/unreadMessagesTextView"
+                android:id="@+id/textView2"
                 android:layout_gravity="bottom|right"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp" />
@@ -58,8 +58,8 @@
         <ImageView
             android:layout_width="@dimen/title_height"
             android:layout_height="@dimen/title_height"
-            android:id="@+id/questionmarkImageView"
-            android:src="@drawable/questionmark"
+            android:id="@+id/imageView3"
+            android:src="@drawable/questionmark_black"
             android:layout_marginLeft="5dp"
             android:clickable="true"
             android:onClick="extraInfo"/>

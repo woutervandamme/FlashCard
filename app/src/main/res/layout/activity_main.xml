@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout1"
+    android:id="@+id/masterLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/wood_texture"
@@ -20,11 +20,13 @@
         android:paddingBottom="@dimen/basic_medium_high_padding" >
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/registerTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="@string/register" />
+            android:text="@string/register"
+            android:clickable="true"
+            android:onClick="toRegister" />
 
         <TextView
             android:id="@+id/emailTextview"
@@ -66,11 +68,12 @@
         android:orientation="vertical" >
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/loginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="@string/login" />
+            android:text="@string/login"
+            android:onClick="login"/>
 
     </LinearLayout>
 

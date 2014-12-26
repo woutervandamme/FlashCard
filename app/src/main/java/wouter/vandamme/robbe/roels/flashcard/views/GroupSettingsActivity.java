@@ -1,4 +1,4 @@
-package wouter.vandamme.robbe.roels.flashcard;
+package wouter.vandamme.robbe.roels.flashcard.views;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -7,19 +7,20 @@ import android.view.MenuItem;
 
 import wouter.vandamme.robbe.roels.flashcard.R;
 
-public class MenuActivity extends ActionBarActivity {
+
+public class GroupSettingsActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_group_settings);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_menu, menu);
+        getMenuInflater().inflate(R.menu.menu_group_settings, menu);
         return true;
     }
 

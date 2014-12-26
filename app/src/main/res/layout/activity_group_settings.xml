@@ -58,14 +58,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/normalInvite"
-                android:id="@+id/checkBox" />
+                android:id="@+id/inviteCheckbox" />
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/normalAddQuestion"
                 android:layout_marginBottom="@dimen/basic_medium_padding"
-                android:id="@+id/checkBox2" />
+                android:id="@+id/questionCheckbox" />
 
         </LinearLayout>
 
@@ -76,7 +76,7 @@
             android:layout_height="fill_parent">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/questionTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/question"
@@ -85,7 +85,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText2" />
+                android:id="@+id/questionEditText" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -111,12 +111,12 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/answer"
-                android:id="@+id/textView5" />
+                android:id="@+id/answerTextView" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText3" />
+                android:id="@+id/answerEditText" />
 
             <Button
                 android:layout_width="wrap_content"

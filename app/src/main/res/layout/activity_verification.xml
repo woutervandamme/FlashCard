@@ -7,14 +7,14 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="wouter.vandamme.robbe.roels.flashcard.QuestionActivity"
+    tools:context="wouter.vandamme.robbe.roels.flashcard.views.QuestionActivity"
     android:background="@drawable/wood_texture"
     android:gravity="center">
 
     <include
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        layout="@layout/header" />
+        layout="@layout/header_black" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,13 +22,14 @@
         android:orientation="vertical"
         android:gravity="center">
 
+        <!-- will contain the correct/wrong reply to the answer the user gave -->
         <TextView
             android:paddingTop="@dimen/title_padding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/dummyHeaderTitle"
-            android:id="@+id/textView3" />
+            android:id="@+id/responseTextView" />
 
 
         <LinearLayout
@@ -45,14 +46,14 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/extraInfo"
-                android:id="@+id/extraInfoTextview"
+                android:id="@+id/extraInfoHeaderTextview"
                 android:layout_gravity="center_horizontal" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/dummyAnswer"
-                    android:id="@+id/textView4" />
+                    android:id="@+id/extraInfoTextView" />
 
         </LinearLayout>
 
@@ -66,14 +67,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/feedback"
-                android:id="@+id/button3"
+                android:id="@+id/feedbackButton"
                 android:layout_gravity="left" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/editinfo"
-                android:id="@+id/button2"
+                android:id="@+id/extraInfoButton"
                 android:layout_gravity="center_horizontal" />
 
             <Button

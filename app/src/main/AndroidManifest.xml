@@ -8,13 +8,22 @@
         android:minSdkVersion="10"
         android:targetSdkVersion="19" />
 
-    <android:uses-permission
+    <!-- Permissions -->
+
+    <!-- Will need write and read of memory for the database & images -->
+    <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <android:uses-permission
+    <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
+
+    <!-- Phone state, so we can see when the user switches from Cellular to wifi, or to a bad cellular connection
+        This could be for an update where we make sure no images are loaded on a slow connection-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <!-- Obviously needs INTERNET permission to load data from the server to the user.-->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -22,48 +31,47 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name=".views.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".RegisterActivity"
+            android:name=".views.RegisterActivity"
             android:label="@string/registerButton" >
         </activity>
         <activity
-            android:name=".MenuActivity"
+            android:name=".views.MenuActivity"
             android:label="@string/title_activity_menu" >
         </activity>
         <activity
-            android:name=".QuestionActivity"
+            android:name=".views.QuestionActivity"
             android:label="@string/title_activity_question" >
         </activity>
         <activity
-            android:name=".VerificationActivity"
+            android:name=".views.VerificationActivity"
             android:label="@string/title_activity_verification" >
         </activity>
         <activity
-            android:name=".SettingsActivity"
+            android:name=".views.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
         <activity
-            android:name=".CreateGroupActivity"
+            android:name=".views.CreateGroupActivity"
             android:label="@string/title_activity_create_group" >
         </activity>
         <activity
-            android:name=".GroupSettingsActivity"
+            android:name=".views.GroupSettingsActivity"
             android:label="@string/title_activity_group_settings" >
         </activity>
         <activity
-            android:name=".MessagesActivity"
+            android:name=".views.MessagesActivity"
             android:label="@string/title_activity_messages" >
         </activity>
         <activity
-            android:name=".ReadMessageActivity"
+            android:name=".views.ReadMessageActivity"
             android:label="@string/title_activity_read_message" >
         </activity>
     </application>

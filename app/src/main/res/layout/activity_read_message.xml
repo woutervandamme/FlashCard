@@ -22,7 +22,7 @@
         >
 
         <TextView
-            android:id="@+id/settingsTextView"
+            android:id="@+id/messageTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -38,7 +38,7 @@
             android:layout_margin="@dimen/basic_medium_padding">
 
             <TextView
-                android:id="@+id/Message"
+                android:id="@+id/MessageTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/dummyMessage"
@@ -50,6 +50,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent">
 
+                <!-- the text value of this button will change depending on what Activity is called -->
+
                 <Button
                     android:id="@+id/positiveButton"
                     android:layout_width="wrap_content"
@@ -58,7 +60,7 @@
                     android:layout_weight="1" />
 
 
-                <!-- the text value of this button will change depending on what Activity is called -->
+                <!-- the text value of this button will change depending on type of message -->
                 <Button
                     android:id="@+id/negativeButton"
                     android:layout_width="wrap_content"
