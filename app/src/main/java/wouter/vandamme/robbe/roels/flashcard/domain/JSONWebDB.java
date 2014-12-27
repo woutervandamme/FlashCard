@@ -300,47 +300,171 @@ public class JSONWebDB implements Database {
 
     @Override
     public void updateQuestion(Question question) throws DBException {
+        String values = null;
+        String sql = "update Question set answer = ?, extraInfo = ?, question = ?, type = ? WHERE id = ?";
+        try {
+            values = question.getAnswer() + "===" + question.getExtraInfo() + "===" + question.getQuestion() + "===" + QuestionFactory.toDatabaseString(question)+ "==="+question.getId();
+        } catch (DomainException e) {
+            throw new DBException(e);
+        }
 
+        String params = "line="+sql+"&vals="+values+"&types="+"ssssi";
+        DatabaseTask dbTask = new DatabaseTask();
+        dbTask.execute(url,params);
+        while (!dbTask.done()) {
+        }
+        if (dbTask.fetched()) {
+            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
+        }
+        else{
+            Log.v("DATA", "NOT INSERTED" );
+        }
     }
 
     @Override
     public void updateUser(User user) throws DBException {
-
+        String sql = "update user set e-mail = ?,name = ?,pw = ? WHERE e-mail = ?";
+        String values = user.getEmail()+"==="+user.getName()+"==="+user.getPw()+"==="+user.getEmail();
+        String params = "line="+sql+"&vals="+values+"&types="+"ssss";
+        DatabaseTask dbTask = new DatabaseTask();
+        dbTask.execute(url,params);
+        while (!dbTask.done()) {
+        }
+        if (dbTask.fetched()) {
+            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
+        }
+        else{
+            Log.v("DATA", "NOT INSERTED" );
+        }
     }
 
     @Override
-    public void updateGroupName(int i, String s) throws DBException {
-
+    public void updateGroupName(int id, String name) throws DBException {
+        String sql = "update group set name = ? WHERE ID = ?";
+        String values = name+"==="+id;
+        String params = "line="+sql+"&vals="+values+"&types="+"si";
+        DatabaseTask dbTask = new DatabaseTask();
+        dbTask.execute(url,params);
+        while (!dbTask.done()) {
+        }
+        if (dbTask.fetched()) {
+            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
+        }
+        else{
+            Log.v("DATA", "NOT INSERTED" );
+        }
     }
 
     @Override
-    public void removeUserFromGroup(int i, String s) throws DBException {
-
+    public void removeUserFromGroup(int id, String email) throws DBException {
+        String sql = "DELETE from UsersInGroup where GroupID = ? AND UserID = ?";
+        String values = id+"==="+email;
+        String params = "line="+sql+"&vals="+values+"&types="+"is";
+        DatabaseTask dbTask = new DatabaseTask();
+        dbTask.execute(url,params);
+        while (!dbTask.done()) {
+        }
+        if (dbTask.fetched()) {
+            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
+        }
+        else{
+            Log.v("DATA", "NOT INSERTED" );
+        }
     }
 
     @Override
-    public void addUserToGroup(int i, String s) throws DBException {
+    public void addUserToGroup(int id, String email) throws DBException {
+        String sql = "insert into usersInGroup(GroupID,UserID) values (?,?)";
+        String values = id+"==="+email;
+        String params = "line="+sql+"&vals="+values+"&types="+"is";
+        DatabaseTask dbTask = new DatabaseTask();
+        dbTask.execute(url,params);
+        while (!dbTask.done()) {
+        }
+        if (dbTask.fetched()) {
+            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
+        }
+        else{
+            Log.v("DATA", "NOT INSERTED" );
+        }
+
 
     }
 
     @Override
     public void addUser(User user) throws DBException {
+        String sql = "insert into User(email,name,pw) values(?,?,?)";
+        String values = user.getEmail()+"==="+user.getName()+"==="+user.getPw();
 
+        String params = "line="+sql+"&vals="+values+"&types="+"sss";
+        DatabaseTask dbTask = new DatabaseTask();
+        dbTask.execute(url,params);
+        while (!dbTask.done()) {
+        }
+        if (dbTask.fetched()) {
+            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
+        }
+        else{
+            Log.v("DATA", "NOT INSERTED" );
+        }
     }
 
     @Override
     public void addQuestion(Question question) throws DBException {
-
+        String values = null;
+        String sql = "insert into Question(answer,extraInfo,question,type) values(?,?,?,?)";
+        try {
+            values = question.getAnswer() + "===" + question.getExtraInfo() + "===" + question.getQuestion() + "===" + QuestionFactory.toDatabaseString(question);
+        } catch (DomainException e) {
+            e.printStackTrace();
+        }
+        String params = "line="+sql+"&vals="+values+"&types="+"ssss";
+        DatabaseTask dbTask = new DatabaseTask();
+        dbTask.execute(url,params);
+        while (!dbTask.done()) {
+        }
+        if (dbTask.fetched()) {
+            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
+        }
+        else{
+            Log.v("DATA", "NOT INSERTED" );
+        }
     }
 
     @Override
     public void addGroup(Group group) throws DBException {
+        String sql = "insert into Group(name,admin) values(?,?)";
+        String values = group.getName() + "===" + group.getAdmin().getEmail();
+
+        String params = "line="+sql+"&vals="+values+"&types="+"ss";
+        DatabaseTask dbTask = new DatabaseTask();
+        dbTask.execute(url,params);
+        while (!dbTask.done()) {
+        }
+        if (dbTask.fetched()) {
+            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
+        }
+        else{
+            Log.v("DATA", "NOT INSERTED" );
+        }
 
     }
 
     @Override
     public void sendMessage(Message message) throws DBException {
-
+        String sql = "insert into Message(title,body,type,UserID) values(?,?,?,?)";
+        String values = message.getTitle() + "===" + message.getBody()+ "===" + message.getType().toString() + "===" + message.getReceiver().getEmail();
+        String params = "line="+sql+"&vals="+values+"&types="+"ssss";
+        DatabaseTask dbTask = new DatabaseTask();
+        dbTask.execute(url,params);
+        while (!dbTask.done()) {
+        }
+        if (dbTask.fetched()) {
+            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
+        }
+        else{
+            Log.v("DATA", "NOT INSERTED" );
+        }
     }
 
 }
