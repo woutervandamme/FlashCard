@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import db.DBException;
@@ -26,6 +27,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         email = (EditText) findViewById(R.id.emailEditText);
         password = (EditText) findViewById(R.id.passwordEditText);
+        email.setText("test@test.lol");
+        password.setText("test");
     }
 
     public void toRegister(View view){
@@ -65,7 +68,6 @@ public class MainActivity extends Activity {
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context,message, duration);
         toast.show();
-
     }
 
 

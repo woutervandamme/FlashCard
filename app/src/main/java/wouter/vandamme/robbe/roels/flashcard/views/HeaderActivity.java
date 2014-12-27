@@ -12,20 +12,22 @@ import android.widget.Toast;
 public class HeaderActivity extends Activity {
     protected String extraInfo;
     public HeaderActivity(String extraInfo){ this.extraInfo = extraInfo; }
-    protected void extraInfo(View view){
-        Context context = getApplicationContext();
+
+    public void extraInfo(View view){
+        Context context = view.getContext();
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, extraInfo, duration);
         toast.show();
     }
-    protected void toMessages(View view){
+    public void toMessages(View view){
         Intent intent = new Intent(this, MessagesActivity.class);
         startActivity(intent);
     }
-    protected void toSettings(View view) {
+    public void toSettings(View view) {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
+
 
 
 }
