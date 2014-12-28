@@ -15,7 +15,7 @@ public class HeaderActivity extends Activity {
 
     public void extraInfo(View view){
         Context context = view.getContext();
-        int duration = Toast.LENGTH_SHORT;
+        int duration = Toast.LENGTH_LONG;
         Toast toast = Toast.makeText(context, extraInfo, duration);
         toast.show();
     }

@@ -24,11 +24,21 @@ import domain.User;
  */
 public class JSONWebDB implements Database {
     private String url = "http://twittervoetbal.be/dbFlashcards.php";
+    private String dbPrefix = "`c9flashcard`.";
+    private String userTable = "`User`";
+    private String groupTable = "`Group`";
+    private String questionsInGroupTable = "`QuestionsInGroup`";
+    private String messageTable = "`Message`";
+    private String usersInGroupTable = "`UsersInGroup`";
+    private String questionTable = "`Question`";
+
+
+
 
     @Override
     public User getUser(String email) throws DBException {
         User user = null;
-        String sql = "SELECT * FROM `User` WHERE email = ?";
+        String sql = "SELECT * FROM "+dbPrefix + userTable +" WHERE email = ?";
         String params = "line="+sql+"&vals="+email+"&types="+"s";
         DatabaseTask dbTask = new DatabaseTask();
         dbTask.execute(url,params);
@@ -58,7 +68,7 @@ public class JSONWebDB implements Database {
 
     @Override
     public Question getRandomQuestion(int id) throws DBException {
-        String sql = "SELECT * FROM QuestionsInGroup WHERE groupID = ?";
+        String sql = "SELECT * FROM +"+dbPrefix + questionsInGroupTable +"WHERE groupID = ?";
         String params = "line="+sql+"&vals="+id+"&types="+"i";
         DatabaseTask dbTask = new DatabaseTask();
         dbTask.execute(url,params);
@@ -89,7 +99,7 @@ public class JSONWebDB implements Database {
 
     @Override
     public Message getMessage(int id) throws DBException {
-        String sql = "SELECT * FROM `Message` WHERE ID = ?";
+        String sql = "SELECT * FROM " + dbPrefix + messageTable + " WHERE ID = ?";
         String params = "line="+sql+"&vals="+id+"&types="+"i";
         DatabaseTask dbTask = new DatabaseTask();
         dbTask.execute(url,params);
@@ -121,7 +131,7 @@ public class JSONWebDB implements Database {
 
     @Override
     public ArrayList<User> getUsersFromGroup(int id) throws DBException {
-        String sql = "SELECT * FROM `UsersInGroup` WHERE groupID = ?";
+        String sql = "SELECT * FROM "+ dbPrefix + usersInGroupTable + " WHERE groupID = ?";
         String params = "line="+sql+"&vals="+id+"&types="+"i";
         DatabaseTask dbTask = new DatabaseTask();
         dbTask.execute(url,params);
@@ -149,7 +159,7 @@ public class JSONWebDB implements Database {
 
     @Override
     public ArrayList<Message> getMessages(String email) throws DBException {
-        String sql = "SELECT * FROM `Message` WHERE UserID = ? ";
+        String sql = "SELECT * FROM "+ dbPrefix + messageTable + " WHERE UserID = ? ";
         String params = "line="+sql+"&vals="+email+"&types="+"s";
         DatabaseTask dbTask = new DatabaseTask();
         dbTask.execute(url,params);
@@ -181,7 +191,7 @@ public class JSONWebDB implements Database {
 
     @Override
     public ArrayList<Group> getGroupsForUser(String email) throws DBException {
-        String sql = "SELECT * FROM `UsersInGroup` WHERE userID = ?";
+        String sql = "SELECT * FROM " + dbPrefix + usersInGroupTable + " WHERE userID = ?";
         String params = "line="+sql+"&vals="+email+"&types="+"s";
         DatabaseTask dbTask = new DatabaseTask();
         dbTask.execute(url,params);
@@ -209,7 +219,7 @@ public class JSONWebDB implements Database {
 
     @Override
     public User getGroupAdmin(int id) throws DBException {
-        String sql = "SELECT admin FROM `Group` WHERE ID = ?";
+        String sql = "SELECT admin FROM "+ dbPrefix + groupTable + " WHERE ID = ?";
         String params = "line="+sql+"&vals="+id+"&types="+"i";
         DatabaseTask dbTask = new DatabaseTask();
         dbTask.execute(url,params);
@@ -237,7 +247,7 @@ public class JSONWebDB implements Database {
 
     @Override
     public Group getGroup(int id) throws DBException {
-        String sql = "SELECT * FROM `Group` WHERE id = ?";
+        String sql = "SELECT * FROM "+ dbPrefix + groupTable + " WHERE id = ?";
         String params = "line="+sql+"&vals="+id+"&types="+"i";
         DatabaseTask dbTask = new DatabaseTask();
         dbTask.execute(url,params);
@@ -253,7 +263,6 @@ public class JSONWebDB implements Database {
                     JSONObject row = json.getJSONObject(i);
                     User u = getUser(row.getString("admin"));
                     group = new Group(u,row.getString("name"),row.getInt("userCanInvite")==1,row.getInt("userCanAddQuestions")==1);
-                    Log.v("READ THIS THIS IS WHAT U NEED LOLOL",group.toString());
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -269,7 +278,7 @@ public class JSONWebDB implements Database {
 
     @Override
     public Question getQuestion(int id) throws DBException {
-        String sql = "select * from question where id = ?";
+        String sql = "SELECT * FROM "+ dbPrefix + questionTable +" WHERE id = ?";
         String params = "line="+sql+"&vals="+id+"&types="+"i";
         DatabaseTask dbTask = new DatabaseTask();
         dbTask.execute(url,params);
@@ -301,7 +310,7 @@ public class JSONWebDB implements Database {
     @Override
     public void updateQuestion(Question question) throws DBException {
         String values = null;
-        String sql = "update Question set answer = ?, extraInfo = ?, question = ?, type = ? WHERE id = ?";
+        String sql = "UPDATE "+ dbPrefix + questionTable +" SET answer = ?, extraInfo = ?, question = ?, type = ? WHERE id = ?";
         try {
             values = question.getAnswer() + "===" + question.getExtraInfo() + "===" + question.getQuestion() + "===" + QuestionFactory.toDatabaseString(question)+ "==="+question.getId();
         } catch (DomainException e) {
@@ -323,7 +332,7 @@ public class JSONWebDB implements Database {
 
     @Override
     public void updateUser(User user) throws DBException {
-        String sql = "update user set e-mail = ?,name = ?,pw = ? WHERE e-mail = ?";
+        String sql = "UPDATE "+ dbPrefix + userTable + " SET e-mail = ?,name = ?,pw = ? WHERE e-mail = ?";
         String values = user.getEmail()+"==="+user.getName()+"==="+user.getPw()+"==="+user.getEmail();
         String params = "line="+sql+"&vals="+values+"&types="+"ssss";
         DatabaseTask dbTask = new DatabaseTask();
@@ -336,11 +345,26 @@ public class JSONWebDB implements Database {
         else{
             Log.v("DATA", "NOT INSERTED" );
         }
+        sql = "UPDATE "+ dbPrefix + usersInGroupTable + " SET UserID = ? WHERE UserID = ?";
+        values = user.getEmail() +"==="+ user.getEmail();
+        params = "line="+sql+"&vals="+values+"&types="+"ss";
+        dbTask = new DatabaseTask();
+        dbTask.execute(url,params);
+        while (!dbTask.done()) {
+        }
+        if (dbTask.fetched()) {
+            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
+        }
+        else{
+            Log.v("DATA", "NOT INSERTED" );
+        }
+
+
     }
 
     @Override
     public void updateGroupName(int id, String name) throws DBException {
-        String sql = "update group set name = ? WHERE ID = ?";
+        String sql = "UPDATE "+ dbPrefix + groupTable +" SET name = ? WHERE ID = ?";
         String values = name+"==="+id;
         String params = "line="+sql+"&vals="+values+"&types="+"si";
         DatabaseTask dbTask = new DatabaseTask();
@@ -357,7 +381,7 @@ public class JSONWebDB implements Database {
 
     @Override
     public void removeUserFromGroup(int id, String email) throws DBException {
-        String sql = "DELETE from UsersInGroup where GroupID = ? AND UserID = ?";
+        String sql = "DELETE FROM " + dbPrefix + usersInGroupTable + " WHERE GroupID = ? AND UserID = ?";
         String values = id+"==="+email;
         String params = "line="+sql+"&vals="+values+"&types="+"is";
         DatabaseTask dbTask = new DatabaseTask();
@@ -374,7 +398,7 @@ public class JSONWebDB implements Database {
 
     @Override
     public void addUserToGroup(int id, String email) throws DBException {
-        String sql = "insert into usersInGroup(GroupID,UserID) values (?,?)";
+        String sql = "INSERT INTO "+ dbPrefix + usersInGroupTable + " (GroupID,UserID) VALUES(?,?)";
         String values = id+"==="+email;
         String params = "line="+sql+"&vals="+values+"&types="+"is";
         DatabaseTask dbTask = new DatabaseTask();
@@ -393,7 +417,7 @@ public class JSONWebDB implements Database {
 
     @Override
     public void addUser(User user) throws DBException {
-        String sql = "insert into User(email,name,pw) values(?,?,?)";
+        String sql = "INSERT INTO " + dbPrefix + userTable + "(email,name,pw) VALUES(?,?,?)";
         String values = user.getEmail()+"==="+user.getName()+"==="+user.getPw();
 
         String params = "line="+sql+"&vals="+values+"&types="+"sss";
@@ -412,7 +436,7 @@ public class JSONWebDB implements Database {
     @Override
     public void addQuestion(Question question) throws DBException {
         String values = null;
-        String sql = "insert into Question(answer,extraInfo,question,type) values(?,?,?,?)";
+        String sql = "INSERT INTO "+ dbPrefix + questionTable +"(answer,extraInfo,question,type) VALUES(?,?,?,?)";
         try {
             values = question.getAnswer() + "===" + question.getExtraInfo() + "===" + question.getQuestion() + "===" + QuestionFactory.toDatabaseString(question);
         } catch (DomainException e) {
@@ -433,16 +457,21 @@ public class JSONWebDB implements Database {
 
     @Override
     public void addGroup(Group group) throws DBException {
-        String sql = "insert into Group(name,admin) values(?,?)";
-        String values = group.getName() + "===" + group.getAdmin().getEmail();
+        String sql = "INSERT INTO "+ dbPrefix + groupTable + "(name,admin,userCanInvite,userCanAddQuestions) VALUES(?,?,?,?)";
 
-        String params = "line="+sql+"&vals="+values+"&types="+"ss";
+        int canIvite = (group.canUserInviteFriends()) ? 1:0;
+        int canAdd = (group.canUserAddQuestion()) ? 1:0;
+
+
+        String values = group.getName() + "===" + group.getAdmin().getEmail() + "===" +  canIvite + "===" + canAdd;
+        String params = "line="+sql+"&vals="+values+"&types="+"ssii";
         DatabaseTask dbTask = new DatabaseTask();
         dbTask.execute(url,params);
         while (!dbTask.done()) {
         }
         if (dbTask.fetched()) {
             Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
+            addUserToGroup(Integer.parseInt(dbTask.getJsonString()),group.getAdmin().getEmail());
         }
         else{
             Log.v("DATA", "NOT INSERTED" );
@@ -452,7 +481,7 @@ public class JSONWebDB implements Database {
 
     @Override
     public void sendMessage(Message message) throws DBException {
-        String sql = "insert into Message(title,body,type,UserID) values(?,?,?,?)";
+        String sql = "INSERT INTO "+ dbPrefix + messageTable + "(title,body,type,UserID) VALUES(?,?,?,?)";
         String values = message.getTitle() + "===" + message.getBody()+ "===" + message.getType().toString() + "===" + message.getReceiver().getEmail();
         String params = "line="+sql+"&vals="+values+"&types="+"ssss";
         DatabaseTask dbTask = new DatabaseTask();

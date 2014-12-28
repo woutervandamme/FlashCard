@@ -17,6 +17,14 @@
             android:layout_marginRight="5dp"
             android:clickable="true"
             android:onClick="toSettings"/>
+        <ImageView
+            android:layout_width="@dimen/title_height"
+            android:layout_height="@dimen/title_height"
+            android:id="@+id/shareImage"
+            android:src="@drawable/share"
+            android:layout_marginRight="5dp"
+            android:clickable="true"
+            android:onClick="share"/>
         <!-- title must be set programmaticly -->
         <TextView
             android:layout_width="fill_parent"

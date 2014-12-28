@@ -54,8 +54,10 @@ public class MenuActivity extends HeaderActivity {
             public void onItemClick(AdapterView<?> adapter, View v, int position,
                                     long arg3) {
                 Group group = (Group) adapter.getItemAtPosition(position);
-                toQuestion.putExtra("GroupID",group.getId()+"");
+                toQuestion.putExtra("GroupID",group.getId());
                 toQuestion.putExtra("GroupName",group.getName());
+                toQuestion.putExtra("canAddQuestions",group.canUserAddQuestion());
+                toQuestion.putExtra("canInvite",group.canUserInviteFriends());
                 startActivity(toQuestion);
             }
         };

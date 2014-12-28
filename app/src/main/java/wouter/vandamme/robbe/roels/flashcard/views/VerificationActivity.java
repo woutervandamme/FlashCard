@@ -3,6 +3,7 @@ package wouter.vandamme.robbe.roels.flashcard.views;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.TextView;
 
 import wouter.vandamme.robbe.roels.flashcard.R;
 
@@ -17,6 +18,10 @@ public class VerificationActivity extends HeaderActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verification);
+
+        ((TextView) findViewById(R.id.responseTextView)).setText(getIntent().getExtras().getString("answercheck"));
+        ((TextView) findViewById(R.id.extraInfoTextView)).setText(getIntent().getExtras().getString("extraInfo"));
+        ((TextView) findViewById(R.id.title_id)).setText(getIntent().getExtras().getString("GroupName"));
     }
 
 

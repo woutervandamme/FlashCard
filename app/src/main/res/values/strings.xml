@@ -54,7 +54,11 @@
     <string name="postiveDummy">Postive</string>
     <string name="negativeDummy">Negative</string>
     <string name="dummyMessage">Hi, you have been invited to the group dummy dumdums</string>
-
+    <string name="choice">Choose one</string>
+    <string-array name="choices">
+        <item>Invite a user to the group</item>
+        <item>Manage the group/Add questions</item>
+    </string-array>
 
 
 
