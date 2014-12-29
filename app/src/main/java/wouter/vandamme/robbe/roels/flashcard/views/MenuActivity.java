@@ -3,6 +3,7 @@ package wouter.vandamme.robbe.roels.flashcard.views;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -54,6 +55,7 @@ public class MenuActivity extends HeaderActivity {
             public void onItemClick(AdapterView<?> adapter, View v, int position,
                                     long arg3) {
                 Group group = (Group) adapter.getItemAtPosition(position);
+                Log.v("ID on click: ", group.getId()+"");
                 toQuestion.putExtra("GroupID",group.getId());
                 toQuestion.putExtra("GroupName",group.getName());
                 toQuestion.putExtra("canAddQuestions",group.canUserAddQuestion());
@@ -87,5 +89,13 @@ public class MenuActivity extends HeaderActivity {
             e.printStackTrace();
         }
         return adapter;
+    }
+
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        ArrayAdapter adapter = getArrayAdapter();
+        groupList.setAdapter(adapter);
     }
 }

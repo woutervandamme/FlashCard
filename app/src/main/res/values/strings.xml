@@ -47,7 +47,7 @@
     <string name="takePicture">Take picture</string>
     <string name="uploadPicture">Upload picture</string>
     <string name="answer">Answer</string>
-    <string name="saveAnswer">Save answer</string>
+    <string name="saveAnswer">Save question</string>
     <string name="title_activity_messages">MessagesActivity</string>
     <string name="dummyMessageHeader">Message from dummy</string>
     <string name="title_activity_read_message">ReadMessageActivity</string>
@@ -59,6 +59,9 @@
         <item>Invite a user to the group</item>
         <item>Manage the group/Add questions</item>
     </string-array>
+    <string name="addInfo">Add info</string>
+
+
 
 
 

@@ -219,35 +219,15 @@ public class JSONWebDB implements Database {
 
     @Override
     public User getGroupAdmin(int id) throws DBException {
-        String sql = "SELECT admin FROM "+ dbPrefix + groupTable + " WHERE ID = ?";
-        String params = "line="+sql+"&vals="+id+"&types="+"i";
-        DatabaseTask dbTask = new DatabaseTask();
-        dbTask.execute(url,params);
-        User admin = null;
-        while (!dbTask.done()) {
-        }
-        if (dbTask.fetched()) {
-            JSONArray json;
-            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
-            try {
-                json = new JSONArray(dbTask.getJsonString());
-                for (int i = 0; i < json.length(); i++) {
-                    JSONObject row = json.getJSONObject(i);
-                    admin = getUser(row.getString("UserID"));
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        else{
-            Log.v("DATA", "NOT FETCHED" );
-        }
-        return admin;
+        Log.v("ID",id+"");
+        Group g = getGroup(id);
+        return g.getAdmin();
     }
 
     @Override
     public Group getGroup(int id) throws DBException {
         String sql = "SELECT * FROM "+ dbPrefix + groupTable + " WHERE id = ?";
+        Log.v("SQL",sql);
         String params = "line="+sql+"&vals="+id+"&types="+"i";
         DatabaseTask dbTask = new DatabaseTask();
         dbTask.execute(url,params);
@@ -263,6 +243,7 @@ public class JSONWebDB implements Database {
                     JSONObject row = json.getJSONObject(i);
                     User u = getUser(row.getString("admin"));
                     group = new Group(u,row.getString("name"),row.getInt("userCanInvite")==1,row.getInt("userCanAddQuestions")==1);
+                    group.setId(id);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -332,9 +313,9 @@ public class JSONWebDB implements Database {
 
     @Override
     public void updateUser(User user) throws DBException {
-        String sql = "UPDATE "+ dbPrefix + userTable + " SET e-mail = ?,name = ?,pw = ? WHERE e-mail = ?";
-        String values = user.getEmail()+"==="+user.getName()+"==="+user.getPw()+"==="+user.getEmail();
-        String params = "line="+sql+"&vals="+values+"&types="+"ssss";
+        String sql = "UPDATE "+ dbPrefix + userTable + " SET name = ?,pw = ? WHERE e-mail = ?";
+        String values = user.getName()+"==="+user.getPw()+"==="+user.getEmail();
+        String params = "line="+sql+"&vals="+values+"&types="+"sss";
         DatabaseTask dbTask = new DatabaseTask();
         dbTask.execute(url,params);
         while (!dbTask.done()) {
@@ -345,28 +326,16 @@ public class JSONWebDB implements Database {
         else{
             Log.v("DATA", "NOT INSERTED" );
         }
-        sql = "UPDATE "+ dbPrefix + usersInGroupTable + " SET UserID = ? WHERE UserID = ?";
-        values = user.getEmail() +"==="+ user.getEmail();
-        params = "line="+sql+"&vals="+values+"&types="+"ss";
-        dbTask = new DatabaseTask();
-        dbTask.execute(url,params);
-        while (!dbTask.done()) {
-        }
-        if (dbTask.fetched()) {
-            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
-        }
-        else{
-            Log.v("DATA", "NOT INSERTED" );
-        }
-
-
     }
 
     @Override
-    public void updateGroupName(int id, String name) throws DBException {
-        String sql = "UPDATE "+ dbPrefix + groupTable +" SET name = ? WHERE ID = ?";
-        String values = name+"==="+id;
-        String params = "line="+sql+"&vals="+values+"&types="+"si";
+    public void updateGroup(int id, String name,boolean canInvite, boolean canAdd) throws DBException {
+        String sql = "UPDATE "+ dbPrefix + groupTable +" SET name = ?,userCanInvite = ? , userCanAddQuestions = ?  WHERE ID = ?";
+        int invite = (canInvite) ? 1:0;
+        int add = (canAdd) ? 1:0;
+
+        String values = name+"==="+invite+"==="+add+"==="+id;
+        String params = "line="+sql+"&vals="+values+"&types="+"siii";
         DatabaseTask dbTask = new DatabaseTask();
         dbTask.execute(url,params);
         while (!dbTask.done()) {

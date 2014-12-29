@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import db.DBException;
+import domain.Group;
 import domain.MessageType;
 import domain.Question;
 import facade.Facade;
@@ -40,7 +42,12 @@ public class QuestionActivity extends HeaderActivity {
         canInvite = getIntent().getExtras().getBoolean("canInvite");
         canAddQuestions = getIntent().getExtras().getBoolean("canAddQuestions");
 
+        loadQuestion();
 
+        toGroupSettings = new Intent(this, GroupSettingsActivity.class);
+    }
+
+    private void loadQuestion() {
         facade = Facade.getInstance();
         try {
             q = facade.getRandomQuestion(groupID);
@@ -61,8 +68,24 @@ public class QuestionActivity extends HeaderActivity {
             e.printStackTrace();
         }
         ((TextView) findViewById(R.id.title_id)).setText(groupname);
-        toGroupSettings = new Intent(this, GroupSettingsActivity.class);
     }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        facade = Facade.getInstance();
+        try {
+            Group g = facade.getGroup(groupID);
+            groupname = g.getName();
+            canInvite = g.canUserInviteFriends();
+            canAddQuestions = g.canUserAddQuestion();
+        } catch (DBException e) {
+            e.printStackTrace();
+        }
+        loadQuestion();
+    }
+
+
 
 
     @Override
@@ -102,14 +125,19 @@ public class QuestionActivity extends HeaderActivity {
                             }
 
                         }else{
-                            if(canAddQuestions) {
-                                toGroupSettings.putExtra("GroupName", groupname);
-                                toGroupSettings.putExtra("GroupID", groupID);
-                                toGroupSettings.putExtra("canAddQuestions", canInvite);
-                                toGroupSettings.putExtra("canInvite", canAddQuestions);
-                                startActivity(toGroupSettings);
-                            }else{
-                                showToast("You do not have enough rights to do this");
+                            try{
+                                facade = Facade.getInstance();
+                                if(canAddQuestions || (facade.getGroupAdmin(groupID).getEmail().equals(facade.getCurrentUser().getEmail()))) {
+                                    toGroupSettings.putExtra("GroupName", groupname);
+                                    toGroupSettings.putExtra("GroupID", groupID);
+                                    toGroupSettings.putExtra("canAddQuestions", canInvite);
+                                    toGroupSettings.putExtra("canInvite", canAddQuestions);
+                                    startActivity(toGroupSettings);
+                                }else{
+                                    showToast("You do not have enough rights");
+                                }
+                            } catch (DBException e) {
+                                e.printStackTrace();
                             }
                         }
                     }

@@ -117,13 +117,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/answerEditText" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/saveAnswer"
-                android:id="@+id/saveAnswerButton"
-                android:layout_gravity="right" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="right">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/addInfo"
+                    android:id="@+id/addInfo"
+                    android:layout_gravity="right"
+                    android:onClick="addInfo"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/saveAnswer"
+                    android:id="@+id/saveAnswerButton"
+                    android:layout_gravity="right"
+                    android:onClick="saveAnswer"/>
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
