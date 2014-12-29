@@ -1,6 +1,8 @@
 package wouter.vandamme.robbe.roels.flashcard.views;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -14,6 +16,7 @@ import org.w3c.dom.Text;
 
 import db.DBException;
 import domain.Group;
+import domain.MessageType;
 import facade.Facade;
 import wouter.vandamme.robbe.roels.flashcard.R;
 
@@ -24,6 +27,7 @@ public class GroupSettingsActivity extends Activity {
     private String groupname;
     private boolean canInvite,canAddQuestions;
     private Facade facade;
+    private String extraInfo ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +62,36 @@ public class GroupSettingsActivity extends Activity {
     public void saveAnswer(View view){
         ((EditText) findViewById(R.id.questionEditText)).getText();
         ((EditText) findViewById(R.id.answerEditText)).getText();
+    }
+
+    public void addInfo(View view){
+        showAddextraInfo();
 
 
     }
 
+    private void showAddextraInfo() {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
+            alert.setTitle("Extra info");
+            alert.setMessage("Add extra info to the question");
+
+            final EditText input = new EditText(this);
+            input.setText(extraInfo);
+            alert.setView(input);
+
+            alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    extraInfo = input.getText().toString();
+                }
+            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    // Canceled.
+                }
+            });
+
+            alert.show();
+    }
 
 
     @Override
