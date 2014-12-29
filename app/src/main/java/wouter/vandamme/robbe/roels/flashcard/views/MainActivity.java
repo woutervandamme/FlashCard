@@ -15,7 +15,7 @@ import facade.Facade;
 import wouter.vandamme.robbe.roels.flashcard.R;
 import wouter.vandamme.robbe.roels.flashcard.domain.JSONWebDB;
 
-public class MainActivity extends Activity {
+public class MainActivity extends CustomActivity {
 
     EditText email;
     EditText password;
@@ -60,15 +60,6 @@ public class MainActivity extends Activity {
         }
     }
 
-
-    //Maybe this could be moved to a static "Functionalities" class.
-    //If there is a use case for it.
-    private void showToast(String message){
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context,message, duration);
-        toast.show();
-    }
 
 
 }

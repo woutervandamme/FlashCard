@@ -9,7 +9,7 @@ import android.widget.Button;
 
 import wouter.vandamme.robbe.roels.flashcard.R;
 
-public class SettingsActivity extends Activity {
+public class SettingsActivity extends CustomActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

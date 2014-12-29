@@ -14,7 +14,7 @@ import db.DBException;
 import facade.Facade;
 import wouter.vandamme.robbe.roels.flashcard.R;
 
-public class CreateGroupActivity extends Activity {
+public class CreateGroupActivity extends CustomActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

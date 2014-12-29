@@ -9,7 +9,7 @@ import android.widget.Toast;
 /**
  * Created by Robbe on 24/12/2014.
  */
-public class HeaderActivity extends Activity {
+public class HeaderActivity extends CustomActivity {
     protected String extraInfo;
     public HeaderActivity(String extraInfo){ this.extraInfo = extraInfo; }
 

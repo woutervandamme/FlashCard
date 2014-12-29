@@ -6,7 +6,7 @@ import android.view.Menu;
 
 import wouter.vandamme.robbe.roels.flashcard.R;
 
-public class RegisterActivity extends Activity {
+public class RegisterActivity extends CustomActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

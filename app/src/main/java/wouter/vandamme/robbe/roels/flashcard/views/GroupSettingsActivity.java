@@ -21,7 +21,7 @@ import facade.Facade;
 import wouter.vandamme.robbe.roels.flashcard.R;
 
 
-public class GroupSettingsActivity extends Activity {
+public class GroupSettingsActivity extends CustomActivity {
 
     private int groupID;
     private String groupname;
