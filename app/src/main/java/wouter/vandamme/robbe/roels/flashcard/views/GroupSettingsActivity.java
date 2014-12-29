@@ -55,7 +55,12 @@ public class GroupSettingsActivity extends Activity {
         return true;
     }
 
+    public void saveAnswer(View view){
+        ((EditText) findViewById(R.id.questionEditText)).getText();
+        ((EditText) findViewById(R.id.answerEditText)).getText();
 
+
+    }
 
 
 
