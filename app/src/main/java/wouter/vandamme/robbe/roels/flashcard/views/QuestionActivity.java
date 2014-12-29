@@ -1,16 +1,13 @@
 package wouter.vandamme.robbe.roels.flashcard.views;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import db.DBException;
 import domain.Group;
@@ -171,11 +168,5 @@ public class QuestionActivity extends HeaderActivity {
         alert.show();
     }
 
-    private void showToast(String message){
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context,message, duration);
-        toast.show();
-    }
 
 }
