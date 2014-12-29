@@ -66,8 +66,6 @@ public class GroupSettingsActivity extends CustomActivity {
 
     public void addInfo(View view){
         showAddextraInfo();
-
-
     }
 
     private void showAddextraInfo() {

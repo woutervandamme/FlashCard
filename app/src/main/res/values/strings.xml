@@ -76,5 +76,6 @@
 
     <string name="errorDatabase">Something went wrong connecting to the database, please try again later.</string>
 
+    <string name="errorMessagesGet">An error occured requesting your messages</string>
 
 </resources>
