@@ -48,7 +48,7 @@ public class GroupSettingsActivity extends CustomActivity {
             ((CheckBox) findViewById(R.id.inviteCheckbox)).setChecked(canInvite);
             ((CheckBox) findViewById(R.id.questionCheckbox)).setChecked(canAddQuestions);
         } catch (DBException e) {
-            e.printStackTrace();
+           showToast( getResources().getString(R.string.errorGroupGet));
         }
     }
 
@@ -104,7 +104,7 @@ public class GroupSettingsActivity extends CustomActivity {
             try {
                 facade.updateGroup(groupID,name,canInvite,canAddQuestions);
             } catch (DBException e) {
-                e.printStackTrace();
+                showToast( getResources().getString(R.string.errorGroupUpdate));
             }
         }
         GroupSettingsActivity.super.onBackPressed();

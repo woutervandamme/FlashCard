@@ -62,7 +62,7 @@ public class QuestionActivity extends HeaderActivity {
             }
 
         } catch (DBException e) {
-            e.printStackTrace();
+            showToast( getResources().getString(R.string.errorQuestionGet));
         }
         ((TextView) findViewById(R.id.title_id)).setText(groupname);
     }
@@ -77,7 +77,7 @@ public class QuestionActivity extends HeaderActivity {
             canInvite = g.canUserInviteFriends();
             canAddQuestions = g.canUserAddQuestion();
         } catch (DBException e) {
-            e.printStackTrace();
+            showToast( getResources().getString(R.string.errorQuestionGet));
         }
         loadQuestion();
     }

@@ -21,6 +21,7 @@ public class MenuActivity extends HeaderActivity {
 
     ListView groupList;
     Intent toQuestion;
+
     public MenuActivity() {
         super("Create a new group or choose one of the groups you're already part of.");
     }
@@ -86,7 +87,7 @@ public class MenuActivity extends HeaderActivity {
                 }
             };
         } catch (DBException e) {
-            e.printStackTrace();
+            showToast( getResources().getString(R.string.errorDatabase));
         }
         return adapter;
     }

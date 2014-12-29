@@ -52,11 +52,11 @@ public class MainActivity extends CustomActivity {
                     Intent intent = new Intent(this, MenuActivity.class);
                     startActivity(intent);
                 } else {
-                    showToast("We did not find your email and password combination, please try again.");
+                    showToast( getResources().getString(R.string.errorLogin));
                 }
             }
         }catch(DBException e){
-            showToast("Something went wrong connecting to the database, please try again later.");
+            showToast( getResources().getString(R.string.errorDatabase));
         }
     }
 
