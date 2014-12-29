@@ -42,7 +42,7 @@ public class CreateGroupActivity extends CustomActivity {
         try {
             facade.addGroup(facade.getCurrentUser().getEmail(),groupname,canIvite,canCreate);
         } catch (DBException e) {
-            showToast("Error occured when adding a group");
+            showToast(getResources().getString(R.string.errorGroupAdd));
         }
 
         Intent intent = new Intent(this,MenuActivity.class);
