@@ -40,23 +40,25 @@ public class MainActivity extends CustomActivity {
     public void login(View view){
         facade = Facade.getInstance();
         facade.setDatabase(new JSONWebDB());
-        String emailTrimmedString = email.getText().toString().trim();
-        String passwordString = password.getText().toString();
-        try {
-            if (emailTrimmedString != null && passwordString != null) {
-                if(facade == null){
-                    Log.v("DATA", "Facade null");
-                }
+        if(validateForm(email,password)) {
+            String emailTrimmedString = email.getText().toString().trim();
+            String passwordString = password.getText().toString();
+            try {
+                if (emailTrimmedString != null && passwordString != null) {
+                    if (facade == null) {
+                        Log.v("DATA", "Facade null");
+                    }
 
-                if (facade.login(emailTrimmedString, passwordString)) {
-                    Intent intent = new Intent(this, MenuActivity.class);
-                    startActivity(intent);
-                } else {
-                    showToast( getResources().getString(R.string.errorLogin));
+                    if (facade.login(emailTrimmedString, passwordString)) {
+                        Intent intent = new Intent(this, MenuActivity.class);
+                        startActivity(intent);
+                    } else {
+                        showToast(getResources().getString(R.string.errorLogin));
+                    }
                 }
+            } catch (DBException e) {
+                showToast(getResources().getString(R.string.errorDatabase));
             }
-        }catch(DBException e){
-            showToast( getResources().getString(R.string.errorDatabase));
         }
     }
 

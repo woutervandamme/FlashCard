@@ -59,7 +59,6 @@ public class QuestionActivity extends HeaderActivity {
     private void loadQuestion() {
         facade = Facade.getInstance();
         try {
-
             q = facade.getRandomQuestion(groupID);
 
             TextView questionTitle = (TextView) findViewById(R.id.questionTitleTextView);
@@ -118,18 +117,22 @@ public class QuestionActivity extends HeaderActivity {
     public void verify(View view){
         Intent verify = new Intent(this, VerificationActivity.class);
         verify.putExtra("extraInfo",q.getExtraInfo());
-        TextView answer = (TextView) findViewById(R.id.answerEditText);
+        EditText answer = (EditText) findViewById(R.id.answerEditText);
 
-        if(answer.getText().toString().toLowerCase().equals(q.getAnswer().toLowerCase())) {
-            verify.putExtra("answercheck", "Correct!");
-        }else{
-            verify.putExtra("answercheck", "Wrong");
+        if(validateForm(answer)){
+            if(answer.getText().toString().toLowerCase().equals(q.getAnswer().toLowerCase())) {
+                verify.putExtra("answercheck", "Correct!");
+            }else{
+                verify.putExtra("answercheck", "Wrong");
+            }
+            verify.putExtra("GroupName",groupname);
+            verify.putExtra("GroupID",groupID);
+            verify.putExtra("canAddQuestions",canInvite);
+            verify.putExtra("canInvite",canAddQuestions);
+            startActivity(verify);
         }
-        verify.putExtra("GroupName",groupname);
-        verify.putExtra("GroupID",groupID);
-        verify.putExtra("canAddQuestions",canInvite);
-        verify.putExtra("canInvite",canAddQuestions);
-        startActivity(verify);
+
+
     }
 
     public void share(View view){
@@ -180,7 +183,11 @@ public class QuestionActivity extends HeaderActivity {
                 if (facade == null) {
                     facade = Facade.getInstance();
                 }
-                facade.sendMessage("Invite to "+groupname,"You have been invited to join the group " + groupname + " with id: "+groupID, MessageType.INVITE.toString(),email);
+                if(email.isEmpty()){
+                    showToast("Empty textfield try again!");
+                }else {
+                    facade.sendMessage("Invite to " + groupname, "You have been invited to join the group " + groupname + " with id: " + groupID, MessageType.INVITE.toString(), email);
+                }
             }
         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {

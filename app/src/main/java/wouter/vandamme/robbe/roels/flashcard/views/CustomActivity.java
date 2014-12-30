@@ -2,6 +2,7 @@ package wouter.vandamme.robbe.roels.flashcard.views;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -21,14 +22,16 @@ public class CustomActivity extends Activity {
     }
 
 
-    public String checkInputVerification(EditText text){
-        if(text.getText().toString() == null || text.getText().toString().isEmpty()){
-            text.setError(getResources().getString(R.string.errorEmptyField));
-            return null;
-        } else {
-            return text.getText().toString();
+    public boolean validateForm(EditText ... form)  {
+        boolean valid = true;
+        for(int i = 0; i < form.length ; i++) {
+            if(form[i].getText().toString().isEmpty() || form[i].getText().toString()==null){
+                showToast("you entered some incorrect values,  try again ") ;
+                form[i].setHintTextColor(Color.RED);
+                valid = false;
+            }
         }
-
+        return valid;
     }
 
 }

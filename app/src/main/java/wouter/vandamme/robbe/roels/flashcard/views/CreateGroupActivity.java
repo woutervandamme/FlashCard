@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import db.DBException;
@@ -34,19 +35,22 @@ public class CreateGroupActivity extends CustomActivity {
 
     public void saveGroup(View view){
         Facade facade = Facade.getInstance();
+        EditText name = ((EditText) findViewById(R.id.nameEditText));
 
-        String groupname = ((TextView) findViewById(R.id.nameEditText)).getText().toString();
-        boolean canIvite = ((CheckBox) findViewById(R.id.inviteCheckbox)).isChecked();
-        boolean canCreate = ((CheckBox) findViewById(R.id.questionCheckbox)).isChecked();
+        if(validateForm(name)) {
+            String groupname = name.getText().toString();
+            boolean canIvite = ((CheckBox) findViewById(R.id.inviteCheckbox)).isChecked();
+            boolean canCreate = ((CheckBox) findViewById(R.id.questionCheckbox)).isChecked();
 
-        try {
-            facade.addGroup(facade.getCurrentUser().getEmail(),groupname,canIvite,canCreate);
-        } catch (DBException e) {
-            showToast(getResources().getString(R.string.errorGroupAdd));
+            try {
+                facade.addGroup(facade.getCurrentUser().getEmail(), groupname, canIvite, canCreate);
+            } catch (DBException e) {
+                showToast(getResources().getString(R.string.errorGroupAdd));
+            }
+
+            Intent intent = new Intent(this, MenuActivity.class);
+            startActivity(intent);
         }
-
-        Intent intent = new Intent(this,MenuActivity.class);
-        startActivity(intent);
 
 
     }

@@ -75,18 +75,23 @@ public class GroupSettingsActivity extends CustomActivity implements Observer {
 
     @Override
     public void onBackPressed(){
-        String name = ((EditText) findViewById(R.id.nameEditText)).getText().toString();
-        boolean invite = ((CheckBox) findViewById(R.id.inviteCheckbox)).isChecked();
-        boolean question = ((CheckBox) findViewById(R.id.questionCheckbox)).isChecked();
 
-        if(!(groupname.equals(name)&&invite==canInvite&&question==canAddQuestions)){
-            try {
-                facade.updateGroup(groupID,name,canInvite,canAddQuestions);
-            } catch (DBException e) {
-                showToast(getResources().getString(R.string.errorGroupUpdate));
+        EditText name = ((EditText) findViewById(R.id.nameEditText));
+        if(validateForm(name)) {
+            String groupName = name.getText().toString();
+            boolean invite = ((CheckBox) findViewById(R.id.inviteCheckbox)).isChecked();
+            boolean question = ((CheckBox) findViewById(R.id.questionCheckbox)).isChecked();
+
+
+            if (!(groupname.equals(name) && invite == canInvite && question == canAddQuestions)) {
+                try {
+                    facade.updateGroup(groupID, groupName, invite, question);
+                } catch (DBException e) {
+                    showToast(getResources().getString(R.string.errorGroupUpdate));
+                }
             }
+            GroupSettingsActivity.super.onBackPressed();
         }
-        GroupSettingsActivity.super.onBackPressed();
     }
 
 
@@ -94,26 +99,32 @@ public class GroupSettingsActivity extends CustomActivity implements Observer {
     public void saveAnswer(View view){
         String question;
         String type = "TEXT";
-        if(imageUpload){
-            type = "IMAGE";
-            question = fileName;
-        }else {
-            question = ((EditText) findViewById(R.id.questionEditText)).getText().toString();
+
+        EditText questionEditText = ((EditText) findViewById(R.id.questionEditText));
+        EditText answerEditText = ((EditText) findViewById(R.id.answerEditText));
+
+        if(validateForm(questionEditText,answerEditText)) {
+            if (imageUpload) {
+                type = "IMAGE";
+                question = fileName;
+            } else {
+                question = questionEditText.getText().toString();
+            }
+            String answer = answerEditText.getText().toString();
+            facade = Facade.getInstance();
+            try {
+                Log.v("Question", "Question is : " + question);
+                facade.addQuestion(answer, extraInfo, question, type, groupID);
+            } catch (DBException e) {
+                showToast(e.getMessage());
+            }
+            Intent intent = new Intent(this, QuestionActivity.class);
+            intent.putExtra("GroupName", groupname);
+            intent.putExtra("GroupID", groupID);
+            intent.putExtra("canAddQuestions", canAddQuestions);
+            intent.putExtra("canInvite", canInvite);
+            startActivity(intent);
         }
-        String answer = ((EditText) findViewById(R.id.answerEditText)).getText().toString();
-        facade = Facade.getInstance();
-        try {
-            Log.v("Question", "Question is : " + question);
-            facade.addQuestion(answer, extraInfo, question, type,groupID);
-        } catch (DBException e) {
-            showToast(e.getMessage());
-        }
-        Intent intent = new Intent(this, QuestionActivity.class);
-        intent.putExtra("GroupName",groupname);
-        intent.putExtra("GroupID",groupID);
-        intent.putExtra("canAddQuestions",canAddQuestions);
-        intent.putExtra("canInvite",canInvite);
-        startActivity(intent);
     }
 
 
