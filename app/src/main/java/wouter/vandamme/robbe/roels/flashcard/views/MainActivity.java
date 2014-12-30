@@ -29,6 +29,8 @@ public class MainActivity extends CustomActivity {
         password = (EditText) findViewById(R.id.passwordEditText);
         email.setText("test@test.lol");
         password.setText("test");
+        facade = Facade.getInstance();
+        facade.setDatabase(new JSONWebDB());
     }
 
     public void toRegister(View view){
@@ -38,8 +40,6 @@ public class MainActivity extends CustomActivity {
 
 
     public void login(View view){
-        facade = Facade.getInstance();
-        facade.setDatabase(new JSONWebDB());
         if(validateForm(email,password)) {
             String emailTrimmedString = email.getText().toString().trim();
             String passwordString = password.getText().toString();

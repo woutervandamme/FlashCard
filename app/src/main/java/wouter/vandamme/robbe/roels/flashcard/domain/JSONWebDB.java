@@ -306,7 +306,7 @@ public class JSONWebDB implements Database {
 
     @Override
     public void updateUser(User user) throws DBException {
-        String sql = "UPDATE "+ dbPrefix + userTable + " SET name = ?,pw = ? WHERE e-mail = ?";
+        String sql = "UPDATE "+ dbPrefix + userTable + " SET name = ?,password = ? WHERE e-mail = ?";
         String values = user.getName()+"==="+user.getPw()+"==="+user.getEmail();
         String params = "line="+sql+"&vals="+values+"&types="+"sss";
         DatabaseTask dbTask = new DatabaseTask();
@@ -375,11 +375,12 @@ public class JSONWebDB implements Database {
 
     @Override
     public void addUser(User user) throws DBException {
-        String sql = "INSERT INTO " + dbPrefix + userTable + "(email,name,pw) VALUES(?,?,?)";
+        String sql = "INSERT INTO " + dbPrefix + userTable + "(email,name,password) VALUES(?,?,?)";
         String values = user.getEmail()+"==="+user.getName()+"==="+user.getPw();
 
         String params = "line="+sql+"&vals="+values+"&types="+"sss";
         DatabaseTask dbTask = new DatabaseTask();
+        Log.v("SQL", sql);
         dbTask.execute(url,params);
         while (!dbTask.done()) {
         }

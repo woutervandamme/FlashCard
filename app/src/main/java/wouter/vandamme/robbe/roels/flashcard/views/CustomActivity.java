@@ -26,11 +26,11 @@ public class CustomActivity extends Activity {
         boolean valid = true;
         for(int i = 0; i < form.length ; i++) {
             if(form[i].getText().toString().isEmpty() || form[i].getText().toString()==null){
-                showToast("you entered some incorrect values,  try again ") ;
                 form[i].setHintTextColor(Color.RED);
                 valid = false;
             }
         }
+        if(!valid){ showToast("you entered some incorrect values,  try again ") ; }
         return valid;
     }
 
