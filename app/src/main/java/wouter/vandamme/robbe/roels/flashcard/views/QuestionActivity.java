@@ -7,14 +7,17 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import db.DBException;
 import domain.Group;
 import domain.MessageType;
 import domain.Question;
+import domain.QuestionText;
 import facade.Facade;
 import wouter.vandamme.robbe.roels.flashcard.R;
+import wouter.vandamme.robbe.roels.flashcard.domain.LoadImageTask;
 
 public class QuestionActivity extends HeaderActivity {
 
@@ -44,16 +47,36 @@ public class QuestionActivity extends HeaderActivity {
         toGroupSettings = new Intent(this, GroupSettingsActivity.class);
     }
 
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+
     private void loadQuestion() {
         facade = Facade.getInstance();
         try {
+
             q = facade.getRandomQuestion(groupID);
 
             TextView questionTitle = (TextView) findViewById(R.id.questionTitleTextView);
             TextView questionText = (TextView) findViewById(R.id.questionTextView);
+            ImageView questionImage =(ImageView) findViewById(R.id.questionImageView);
             if(q!=null) {
                 questionTitle.setText("Question #" + q.getId());
-                questionText.setText(q.getQuestion());
+
+                if(q instanceof QuestionText){
+                    questionText.setText(q.getQuestion());
+                    questionImage.setVisibility(View.GONE);
+                }else{
+                    questionText.setText("Please wait while we load the image");
+                    LoadImageTask loadTask = new LoadImageTask(questionImage,questionText);
+                    loadTask.execute("http://www.twittervoetbal.be/schoolwerkRobbe/"+q.getQuestion());
+                }
+
             }else{
                 questionTitle.setText("No Questions!");
                 questionText.setText("Use the extra options button (the one next to the gear) and choose: 'Add question'");
