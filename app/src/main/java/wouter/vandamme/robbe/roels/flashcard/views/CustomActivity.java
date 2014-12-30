@@ -21,10 +21,14 @@ public class CustomActivity extends Activity {
     }
 
 
-    public void checkInputVerification(EditText text){
+    public String checkInputVerification(EditText text){
         if(text.getText().toString() == null || text.getText().toString().isEmpty()){
             text.setError(getResources().getString(R.string.errorEmptyField));
+            return null;
+        } else {
+            return text.getText().toString();
         }
+
     }
 
 }
