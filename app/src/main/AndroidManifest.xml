@@ -13,10 +13,10 @@
     <!-- Will need write and read of memory for the database & images -->
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="18" />
+        android:maxSdkVersion="21" />
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="18" />
+        android:maxSdkVersion="21" />
     <!-- Will need permission to the camera to take picture questions -->
     <uses-permission android:name="android.permission.CAMERA"/>
 

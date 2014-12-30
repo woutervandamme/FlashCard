@@ -97,13 +97,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/takePicture"
-                    android:id="@+id/takePictureButton" />
+                    android:id="@+id/takePictureButton"
+                    android:onClick="takePicture"/>
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/uploadPicture"
-                    android:id="@+id/uploadPictureButton" />
             </LinearLayout>
 
             <TextView
