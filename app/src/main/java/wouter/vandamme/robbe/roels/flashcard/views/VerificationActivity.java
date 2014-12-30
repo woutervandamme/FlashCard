@@ -1,8 +1,10 @@
 package wouter.vandamme.robbe.roels.flashcard.views;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.widget.TextView;
 
 import wouter.vandamme.robbe.roels.flashcard.R;
@@ -22,6 +24,21 @@ public class VerificationActivity extends HeaderActivity {
         ((TextView) findViewById(R.id.responseTextView)).setText(getIntent().getExtras().getString("answercheck"));
         ((TextView) findViewById(R.id.extraInfoTextView)).setText(getIntent().getExtras().getString("extraInfo"));
         ((TextView) findViewById(R.id.title_id)).setText(getIntent().getExtras().getString("GroupName"));
+    }
+
+    public void nextQuestion(View view){
+        Intent verify = new Intent(this,QuestionActivity.class);
+
+        String groupname = getIntent().getExtras().getString("GroupName");
+        int groupID = getIntent().getExtras().getInt("GroupID");
+        boolean canInvite = getIntent().getExtras().getBoolean("canInvite");
+        boolean canAddQuestions = getIntent().getExtras().getBoolean("canAddQuestions");
+
+        verify.putExtra("GroupName",groupname);
+        verify.putExtra("GroupID",groupID);
+        verify.putExtra("canAddQuestions",canInvite);
+        verify.putExtra("canInvite",canAddQuestions);
+        startActivity(verify);
     }
 
 
