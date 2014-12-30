@@ -64,18 +64,14 @@
 
     <string name="errorQuestionAdd">An error occured adding a question</string>
     <string name="errorQuestionGet">An error occured fetching a question</string>
-
     <string name="errorUserAdd">An error occured adding an user</string>
     <string name="errorUserGet">An error occured fetching an user</string>
-
     <string name="errorGroupGet">An error occured fetching a group</string>
     <string name="errorGroupUpdate">An error occured updating a group</string>
     <string name="errorGroupAdd">An error occured adding a group</string>
-
     <string name="errorLogin">Oops, something went wrong on login</string>
-
     <string name="errorDatabase">Something went wrong connecting to the database, please try again later.</string>
-
     <string name="errorMessagesGet">An error occured requesting your messages</string>
+    <string name="errorEmptyField">This field cannot be empty</string>
 
 </resources>
