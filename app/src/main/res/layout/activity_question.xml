@@ -46,7 +46,7 @@
                 android:id="@+id/questionTitleTextView" />
 
             <FrameLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <!-- Image view and textview "overlap" in code one of them must be hidden -->
@@ -58,8 +58,9 @@
                     android:id="@+id/questionTextView" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="130sp"
+                    android:layout_gravity="center"
                     android:id="@+id/questionImageView" />
 
             </FrameLayout>
