@@ -17,6 +17,10 @@
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
+    <!-- Will need permission to the camera to take picture questions -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+
 
     <!-- Phone state, so we can see when the user switches from Cellular to wifi, or to a bad cellular connection
         This could be for an update where we make sure no images are loaded on a slow connection-->

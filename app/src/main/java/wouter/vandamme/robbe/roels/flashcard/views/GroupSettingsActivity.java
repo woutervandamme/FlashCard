@@ -17,6 +17,7 @@ import org.w3c.dom.Text;
 import db.DBException;
 import domain.Group;
 import domain.MessageType;
+import domain.QuestionFactory;
 import facade.Facade;
 import wouter.vandamme.robbe.roels.flashcard.R;
 
@@ -48,7 +49,7 @@ public class GroupSettingsActivity extends CustomActivity {
             ((CheckBox) findViewById(R.id.inviteCheckbox)).setChecked(canInvite);
             ((CheckBox) findViewById(R.id.questionCheckbox)).setChecked(canAddQuestions);
         } catch (DBException e) {
-           showToast( getResources().getString(R.string.errorGroupGet));
+           showToast(getResources().getString(R.string.errorGroupGet));
         }
     }
 
@@ -60,8 +61,27 @@ public class GroupSettingsActivity extends CustomActivity {
     }
 
     public void saveAnswer(View view){
-        ((EditText) findViewById(R.id.questionEditText)).getText();
-        ((EditText) findViewById(R.id.answerEditText)).getText();
+
+        String type = "TEXT";
+        //TODO check if image is set! If image set set type to ImageQuestion
+        /*
+            if(image!=null){
+                type = "IMAGE";
+                //Upload image to server;
+                question = //link to image;
+            }
+         */
+
+        String question = ((EditText) findViewById(R.id.questionEditText)).getText().toString();
+        String answer = ((EditText) findViewById(R.id.answerEditText)).getText().toString();
+        facade = Facade.getInstance();
+        try {
+            facade.addQuestion(answer,extraInfo,question,type);
+        } catch (DBException e) {
+            showToast(e.getMessage());
+        }
+
+
     }
 
     public void addInfo(View view){
@@ -102,7 +122,7 @@ public class GroupSettingsActivity extends CustomActivity {
             try {
                 facade.updateGroup(groupID,name,canInvite,canAddQuestions);
             } catch (DBException e) {
-                showToast( getResources().getString(R.string.errorGroupUpdate));
+                showToast(getResources().getString(R.string.errorGroupUpdate));
             }
         }
         GroupSettingsActivity.super.onBackPressed();
