@@ -97,7 +97,7 @@ public class QuestionActivity extends HeaderActivity {
         verify.putExtra("extraInfo",q.getExtraInfo());
         TextView answer = (TextView) findViewById(R.id.answerEditText);
 
-        if(answer.getText().toString().equals(q.getAnswer())) {
+        if(answer.getText().toString().toLowerCase().equals(q.getAnswer().toLowerCase())) {
             verify.putExtra("answercheck", "Correct!");
         }else{
             verify.putExtra("answercheck", "Wrong");

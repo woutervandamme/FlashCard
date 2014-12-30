@@ -47,7 +47,6 @@ public class DatabaseTask extends AsyncTask<String, Void, String>  {
                     connection.getInputStream()));
             StringBuilder sb = new StringBuilder();
             String line = null;
-            Log.v("LINE","ready to read line");
             // Read Server Response
             while ((line = reader.readLine()) != null) {
                 // Append server response in string

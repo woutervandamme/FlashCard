@@ -46,7 +46,6 @@ public class JSONWebDB implements Database {
         }
         if (dbTask.fetched()) {
             JSONArray json;
-            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
             try {
                json = new JSONArray(dbTask.getJsonString());
                 for (int i = 0; i < json.length(); i++) {
@@ -75,6 +74,7 @@ public class JSONWebDB implements Database {
         Question q = null;
         while (!dbTask.done()) {
         }
+        Log.v("DATA", "SQL is: '" + dbTask.getJsonString() + "'");
         if (dbTask.fetched()) {
             JSONArray json;
             Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
@@ -86,7 +86,7 @@ public class JSONWebDB implements Database {
                 JSONObject row = json.getJSONObject(rowNumber);
                 int questionID = row.getInt("QuestionID");
                 q = this.getQuestion(questionID);
-
+                q.setId(questionID);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -108,7 +108,6 @@ public class JSONWebDB implements Database {
         }
         if (dbTask.fetched()) {
             JSONArray json;
-            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
             try {
                 json = new JSONArray(dbTask.getJsonString());
                 for (int i = 0; i < json.length(); i++) {
@@ -168,7 +167,6 @@ public class JSONWebDB implements Database {
         }
         if (dbTask.fetched()) {
             JSONArray json;
-            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
             try {
                 json = new JSONArray(dbTask.getJsonString());
                 for (int i = 0; i < json.length(); i++) {
@@ -219,7 +217,6 @@ public class JSONWebDB implements Database {
 
     @Override
     public User getGroupAdmin(int id) throws DBException {
-        Log.v("ID",id+"");
         Group g = getGroup(id);
         return g.getAdmin();
     }
@@ -227,7 +224,6 @@ public class JSONWebDB implements Database {
     @Override
     public Group getGroup(int id) throws DBException {
         String sql = "SELECT * FROM "+ dbPrefix + groupTable + " WHERE id = ?";
-        Log.v("SQL",sql);
         String params = "line="+sql+"&vals="+id+"&types="+"i";
         DatabaseTask dbTask = new DatabaseTask();
         dbTask.execute(url,params);
@@ -236,7 +232,6 @@ public class JSONWebDB implements Database {
         }
         if (dbTask.fetched()) {
             JSONArray json;
-            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
             try {
                 json = new JSONArray(dbTask.getJsonString());
                 for (int i = 0; i < json.length(); i++) {
@@ -268,7 +263,6 @@ public class JSONWebDB implements Database {
         }
         if (dbTask.fetched()) {
             JSONArray json;
-            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
             try {
                 json = new JSONArray(dbTask.getJsonString());
                 for (int i = 0; i < json.length(); i++) {
@@ -304,7 +298,6 @@ public class JSONWebDB implements Database {
         while (!dbTask.done()) {
         }
         if (dbTask.fetched()) {
-            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
         }
         else{
             Log.v("DATA", "NOT INSERTED" );
@@ -321,7 +314,6 @@ public class JSONWebDB implements Database {
         while (!dbTask.done()) {
         }
         if (dbTask.fetched()) {
-            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
         }
         else{
             Log.v("DATA", "NOT INSERTED" );
@@ -341,7 +333,6 @@ public class JSONWebDB implements Database {
         while (!dbTask.done()) {
         }
         if (dbTask.fetched()) {
-            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
         }
         else{
             Log.v("DATA", "NOT INSERTED" );
@@ -358,7 +349,6 @@ public class JSONWebDB implements Database {
         while (!dbTask.done()) {
         }
         if (dbTask.fetched()) {
-            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
         }
         else{
             Log.v("DATA", "NOT INSERTED" );
@@ -375,7 +365,6 @@ public class JSONWebDB implements Database {
         while (!dbTask.done()) {
         }
         if (dbTask.fetched()) {
-            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
         }
         else{
             Log.v("DATA", "NOT INSERTED" );
@@ -395,7 +384,6 @@ public class JSONWebDB implements Database {
         while (!dbTask.done()) {
         }
         if (dbTask.fetched()) {
-            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
         }
         else{
             Log.v("DATA", "NOT INSERTED" );
@@ -403,7 +391,7 @@ public class JSONWebDB implements Database {
     }
 
     @Override
-    public void addQuestion(Question question) throws DBException {
+    public void addQuestion(Question question, int groupID) throws DBException {
         String values = null;
         String sql = "INSERT INTO "+ dbPrefix + questionTable +"(answer,extraInfo,question,type) VALUES(?,?,?,?)";
         try {
@@ -417,7 +405,7 @@ public class JSONWebDB implements Database {
         while (!dbTask.done()) {
         }
         if (dbTask.fetched()) {
-            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
+            addQuestionToGroup(Integer.parseInt(dbTask.getJsonString()),groupID);
         }
         else{
             Log.v("DATA", "NOT INSERTED" );
@@ -439,7 +427,6 @@ public class JSONWebDB implements Database {
         while (!dbTask.done()) {
         }
         if (dbTask.fetched()) {
-            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
             addUserToGroup(Integer.parseInt(dbTask.getJsonString()),group.getAdmin().getEmail());
         }
         else{
@@ -458,11 +445,29 @@ public class JSONWebDB implements Database {
         while (!dbTask.done()) {
         }
         if (dbTask.fetched()) {
-            Log.v("DATA", "String is: '" + dbTask.getJsonString() + "'");
         }
         else{
             Log.v("DATA", "NOT INSERTED" );
         }
+    }
+
+    @Override
+    public void addQuestionToGroup(int QuestionID, int groupID) throws DBException {
+        String sql = "INSERT INTO "+ dbPrefix + questionsInGroupTable + " (GroupID,QuestionID) VALUES(?,?)";
+        String values = groupID+"==="+QuestionID;
+        String params = "line="+sql+"&vals="+values+"&types="+"ii";
+        DatabaseTask dbTask = new DatabaseTask();
+        dbTask.execute(url,params);
+        while (!dbTask.done()) {
+        }
+        if (dbTask.fetched()) {
+        }
+        else{
+            Log.v("DATA", "NOT INSERTED" );
+        }
+
+
+
     }
 
 }

@@ -104,7 +104,7 @@ public class GroupSettingsActivity extends CustomActivity implements Observer {
         facade = Facade.getInstance();
         try {
             Log.v("Question", "Question is : " + question);
-            facade.addQuestion(answer, extraInfo, question, type);
+            facade.addQuestion(answer, extraInfo, question, type,groupID);
         } catch (DBException e) {
             showToast(e.getMessage());
         }
