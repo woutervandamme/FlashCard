@@ -167,7 +167,6 @@ public class QuestionActivity extends HeaderActivity {
                 });
         builder.create().show();
     }
-
     public void showEmailInputDialog() {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
@@ -179,14 +178,23 @@ public class QuestionActivity extends HeaderActivity {
 
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                String email = input.getText().toString();
+                String email = input.getText().toString().toLowerCase();
                 if (facade == null) {
                     facade = Facade.getInstance();
                 }
                 if(email.isEmpty()){
                     showToast("Empty textfield try again!");
                 }else {
-                    facade.sendMessage("Invite to " + groupname, "You have been invited to join the group " + groupname + " with id: " + groupID, MessageType.INVITE.toString(), email);
+                    try{
+                        if(facade.getUser(email)!= null){
+                            facade.addUserToGroup(groupID,email);
+                            showToast(email + " has been added to your group!");
+                        }else{
+                            showToast("User not found try again");
+                        }
+                    } catch (DBException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -197,6 +205,7 @@ public class QuestionActivity extends HeaderActivity {
 
         alert.show();
     }
+
 
 
 }
