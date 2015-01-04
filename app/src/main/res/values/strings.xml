@@ -69,7 +69,7 @@
     <string name="errorGroupGet">An error occured fetching a group</string>
     <string name="errorGroupUpdate">An error occured updating a group</string>
     <string name="errorGroupAdd">An error occured adding a group</string>
-    <string name="errorLogin">Oops, something went wrong on login</string>
+    <string name="errorLogin">Could not find your email and password combination. Please try again</string>
     <string name="errorDatabase">Something went wrong connecting to the database, please try again later.</string>
     <string name="errorMessagesGet">An error occured requesting your messages</string>
     <string name="errorEmptyField">This field cannot be empty</string>

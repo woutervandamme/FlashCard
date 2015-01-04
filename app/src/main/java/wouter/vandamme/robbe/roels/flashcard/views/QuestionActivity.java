@@ -28,6 +28,7 @@ public class QuestionActivity extends HeaderActivity {
     Intent toGroupSettings;
     boolean canInvite;
     boolean canAddQuestions;
+    int questionID;
 
     public QuestionActivity() {
         super("Answer the question in the text field and press 'validate' to check your answer");
@@ -90,19 +91,37 @@ public class QuestionActivity extends HeaderActivity {
     }
 
     @Override
-    public void onResume(){
-        super.onResume();
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        if(q!=null) {
+            savedInstanceState.putInt("QUESTION_ID", q.getId());
+        }else{
+            savedInstanceState.putInt("QUESTION_ID", -1);
+        }
+        savedInstanceState.putInt("GROUP_ID", groupID);
+
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
         facade = Facade.getInstance();
         try {
+            groupID = savedInstanceState.getInt("GROUP_ID");
             Group g = facade.getGroup(groupID);
             groupname = g.getName();
             canInvite = g.canUserInviteFriends();
             canAddQuestions = g.canUserAddQuestion();
+            if(savedInstanceState.getInt("QUESTION_ID") != -1) {
+                q = facade.getQuestion(savedInstanceState.getInt("QUESTION_ID"));
+            }else{
+                loadQuestion();
+            }
         } catch (DBException e) {
-            showToast( getResources().getString(R.string.errorQuestionGet));
+            showToast(getResources().getString(R.string.errorQuestionGet));
         }
-        loadQuestion();
     }
+
+
 
 
 

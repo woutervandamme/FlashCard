@@ -28,11 +28,6 @@ public class MainActivity extends CustomActivity {
         email = (EditText) findViewById(R.id.emailEditText);
         password = (EditText) findViewById(R.id.passwordEditText);
 
-        //TODO Remove this before sending in.
-        email.setText("test@test.lol");
-        password.setText("test");
-        //Until here.
-
         facade = Facade.getInstance();
         facade.setDatabase(new JSONWebDB());
     }
@@ -65,6 +60,8 @@ public class MainActivity extends CustomActivity {
             }
         }
     }
+
+
 
 
 

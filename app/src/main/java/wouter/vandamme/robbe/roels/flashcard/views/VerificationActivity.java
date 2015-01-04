@@ -131,6 +131,14 @@ public class VerificationActivity extends HeaderActivity {
         alert.show();
     }
 
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 
 
 

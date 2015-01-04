@@ -269,6 +269,7 @@ public class JSONWebDB implements Database {
                     JSONObject row = json.getJSONObject(i);
                     question = QuestionFactory.getQuestion(row.getString("answer"),row.getString("question"),row.getString("type"));
                     question.setExtraInfo(row.getString("extrainfo"));
+                    question.setId(id);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
